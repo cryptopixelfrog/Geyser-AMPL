@@ -1,4 +1,4 @@
-# geyser-formulas
+# geyser-formula
 
 ```
 $ pwd
