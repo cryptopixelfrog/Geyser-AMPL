@@ -1,0 +1,76 @@
+[[[[[[[[[[[[[[[ User APY Calucluation ]]]]]]]]]]]]]]]
+
+  periodSec = min(geyser.bonusPeriodSec, programTimeRemaining)
+  1998797 = min(2592000, 1998797)
+  23 days 3 = min(30 days 0, 23 days 3)
+  totalStakedForUserRaw>>> 84849038706900000000 ...this is what user stakes on UI...
+
+  inflowVal = geyser.totalStakedFor(user) * LP_token_price
+  90.788471416383 = 84.8490387069 * 1.07
+
+  userStakingShares = (geyser.totalStakedFor(user) * geyser.totalStakingShares) / geyser.totalStaked
+  84849038.7069 = (84.8490387069 * 7249154574382.655723049443) / 7249154.574382655723049443
+  unstakeQuery>> 3812561541 ...This is user's Current Reward...
+  updateAccounting>> Result {
+  '0': '313515461558311',
+  '1': '589018615387881',
+  '2': '183033376582169938500000000000000',
+  '3': '24884282413667382864804469984320000000',
+  '4': '4332456297',
+  '5': '1612026400'
+}
+
+  geyser.userStakingShareSeconds(1830333.7658216993) 21 days 4
+  geyser.totalStakingShareSeconds(2488428.241366738) 28 days 19
+
+  userTokenSecondsAfterT = geyser.userStakingShareSeconds + (userStakingShares * periodSec)
+  169596005850569.38 = 1830333.7658216993 + (84849038.7069 * 1998797)
+
+  totalTokenSecondsAfterT = geyser.totalStakingShareSeconds + (geyser.totalStakingShares * periodSec)
+  14489588415814816000 = 2488428.241366738 + (7249154574382.655723049443 * 1998797)
+
+  userShareAfterT = userTokenSecondsAfterT / totalTokenSecondsAfterT
+  0.000011704680697863164 = 169596005850569.38 / 14489588415814816000
+
+  < calculateAMPLUnlockedInNext >
+   currentTimestampSec(1612026441)
+   unlockScheduleCount(1)
+   schedule: Result {
+  '0': '975000000000000000000',
+  '1': '723671431327160493182',
+  '2': '1612020795',
+  '3': '1614025237',
+  '4': '7776000',
+  initialLockedShares: '975000000000000000000',
+  unlockedShares: '723671431327160493182',
+  lastUnlockTimestampSec: '1612020795',
+  endAtSec: '1614025237',
+  durationSec: '7776000'
+}
+   scheduleSecRemaining(1998796) 23 days 3 - ...this is Program duration on UI...
+   calcTime(1998796) = Math.min(1998796, 1998797) =  23 days 3
+   initialLockedSharesRaw - 975000000000000000000, initialLockedShares - 975000000000
+   totalAMPLSharesUnlockedInXSec += calcTime/schedule.durationSec * initialLockedShares
+   250620640432.09875 += 1998796/7776000 * 975000000000
+   totalLockedSharesRaw - 251328568672839506818, totalLockedShares - 251328568672.839506818
+   totalLocked(7249154.574382655723049443) - this is Locked Rewards on UI
+   totalAMPLUnlockedInXSec = (totalAMPLSharesUnlockedInXSec / totalLockedShares) * totalLocked
+   7228735.56164646 = (250620640432.09875 / 251328568672.839506818) * 7249154.574382655723049443
+   totalAMPLUnlockedInXSec - 7228735.56164646 - ...this is Reward Unlock Rate on UI...
+   return >> 7228735.56164646
+
+  userDripAfterT = calculateAMPLUnlockedInNext(periodSec) * userShareAfterT
+  84.61004159836035 = 7228735.56164646 * 0.000011704680697863164
+
+  outflowVal = userDripAfterT * AMPL_price
+  83.76394118237675 = 84.61004159836035 * 0.99
+
+  APY = (1 + outflowVal/inflowVal) ** N - 1
+  outflowVal/inflowVal = 83.76394118237675/90.788471416383 = 0.922627508488499
+  (1 + 0.922627508488499) ** 16 - 1
+  1.922627508488499 ** 16 - 1
+  34859.60235703072 - 1
+APY:  34858.60
+APY in percent: 3485860 %
+ii>>> 0.92262750848849890459
+APY2 3485860.2357
